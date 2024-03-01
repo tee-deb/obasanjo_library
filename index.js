@@ -1,29 +1,19 @@
 const express = require('express');
-const morgan = require('morgan');
-const mongoose = require('mongoose');
-const bodyParser = ('body-parser');
-const dotenv = require('dotenv');
+const connectDb = require("./config/dbConnection");
+const dotenv = require('dotenv').config();
+const errorHandler = require("./middleware/errorHandler");
 
-
-
-const port = process.env.PORT || 5000
-
-
-
+connectDb();
 const app = express();
+
+const port = process.env.PORT || 5000;
+
 app.use(express.json());
-app.use(morgan("dev"));
-dotenv.config();
-
-app.get('/', (req, res) => {
-res.send('This Is A Library API');
-});
-
-app.post('/admin', (req, res) => {
-    res.send('this is another library api');
-});
-
+app.use("/api/books", require("./routes/bookRoutes"));
+app.use("/api/admins", require("./routes/adminRoutes"));
+app.use(errorHandler);
 
 app.listen(port, () => {
-    console.log(`Server Is Running On Port: ${port}`);
-})
+
+    console.log(`server running on port ${port}`);
+});
