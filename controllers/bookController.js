@@ -3,13 +3,13 @@ const Book = require("../models/bookModel");
 
 
 
-const getBooks = asyncHandler(async(req, res) => {
+const getBooks = asyncHandler(async (req, res) => {
     const books = await Book.find();
     res.status(200).json(books);
 
 });
 
-const getBook = asyncHandler(async(req, res) => {
+const getBook = asyncHandler(async (req, res) => {
     const book = await Book.findById(req.params.id);
     if(!book) {
         res.status(404);
@@ -19,17 +19,19 @@ const getBook = asyncHandler(async(req, res) => {
 
 });
 
-const saveBook = asyncHandler(async(req, res) => {
-    console.log("The request body is :", req.body);
+const saveBook = asyncHandler(async (req, res) => {
+    console.log("the request body is :", req.body);
     const { name, author, quantity } = req.body;
     if (!name || !author || !quantity) {
         res.status(400);
-        throw new Error('All fields are mandatory');
+        throw new Error('All fields are mandatory')
     }
     const book = await Book.create({
+
         name,
         author,
         quantity,
+        
 
     });
     res.status(201).json(book);
