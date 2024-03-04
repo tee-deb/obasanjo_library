@@ -21,8 +21,8 @@ const getBook = asyncHandler(async (req, res) => {
 
 const saveBook = asyncHandler(async (req, res) => {
     console.log("the request body is :", req.body);
-    const { name, author, quantity } = req.body;
-    if (!name || !author || !quantity) {
+    const { name, author, quantity   } = req.body;
+    if (!name || !author || !quantity )  {
         res.status(400);
         throw new Error('All fields are mandatory')
     }
@@ -32,6 +32,7 @@ const saveBook = asyncHandler(async (req, res) => {
         author,
         quantity,
         
+
 
     });
     res.status(201).json(book);
