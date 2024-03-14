@@ -4,9 +4,11 @@ const { getBook, getBooks, saveBook, deleteBook } = require("../controllers/book
 
 
 
-router.route('/').get(getBooks).post(saveBook);
+router.route('/').get(getBooks)
 
 router.route('/:id').get(getBook);
+
+router.route("/savebook").post(saveBook);
 
 router.route('/:id').delete(deleteBook);
 

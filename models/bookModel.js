@@ -14,8 +14,8 @@ const bookSchema = mongoose.Schema({
         },
         code: {
             type: String,
-            required: true,
-            unique: true,
+            // required: true,
+            // unique: true,
             maxlenght: 5 
         },
 
