@@ -12,12 +12,12 @@ const bookSchema = mongoose.Schema({
             type: String,
             required: (true, "Please add the author name"),
         },
-        code: {
-            type: String,
-            // required: true,
-            // unique: true,
-            maxlenght: 5 
-        },
+        //code: {
+            //type: String,
+            //required: true,
+             //unique: true,
+            //maxlenght: 5 
+        //},
 
         quantity: {
             type: Number,

@@ -53,17 +53,57 @@ const saveBook = async(req,res)=> {
         return res.status(500).json({ message: 'Books Not Created'})
 
     }
-}
+ }
 
-const deleteBook = asyncHandler(async (req, res) => {
-  const book = await Book.findById(req.params.id);
-  if (!book) {
-    res.status(404);
-    throw new Error("Cannot Find Book");
-    await Book.remove();
+ const deleteBook = async (req, res) => {
+  try {
+      const bookId = req.params.id;
+      const book = await Book.findById(bookId);
+
+      if (!book) {
+          return res.status(404).json({ message: 'Book not found' });
+      }
+
+      await book.delete();
+
+      return res.status(200).json({ message: 'Book deleted successfully' });
+  } catch (error) {
+      console.log(error);
+      return res.status(500).json({ message: 'Internal Server Error' });
   }
-  res.status(200).json(book);
-});
+};
+
+// const deleteBook = async(req, res) => {
+
+//     try {
+//         const  bookId  = req.params.id;
+//         const book = await Book.findById({ _id: bookId });
+
+//         await book.delete();
+
+//         return res.status(200).json({ message: 'Books Deleted Successfully'})
+        
+        
+//     } catch (error) {
+
+//         console.log(error);
+//         return res.status(500).json({ message: 'Books Not Deleted'})
+        
+//     }
+
+
+
+
+
+// const deleteBook = asyncHandler(async (req, res) => {
+//   const book = await Book.findById(req.params.id);
+//   if (!book) {
+//     res.status(404);
+//     throw new Error("Cannot Find Book");
+//     await Book.remove();
+//   }
+//   res.status(200).json(book);
+// });
 
 module.exports = {
   getBook,
